@@ -1,21 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;550;600;650;700&family=DM+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 :root {
   font-family: 'DM Sans', sans-serif;
-  color: #e7eeec;
-  background: #0d242e;
+  color: #f1f1f4;
+  background: #101114;
   color-scheme: dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --navy: #0d242e;
-  --ink: #e7eeec;
-  --muted: #a4b5bb;
-  --line: #344e5b;
-  --blue: #a6dce5;
-  --peach: #ffb69a;
-  --display: 'Bricolage Grotesque', sans-serif;
-  --serif: 'Instrument Serif', Georgia, serif;
+  --ink: #f1f1f4;
+  --muted: #9699a6;
+  --line: #292c35;
+  --accent: #ff4057;
+  --display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --sans: 'DM Sans', sans-serif;
   --mono: 'IBM Plex Mono', monospace;
 }
 * {
@@ -51,7 +49,7 @@ button:focus-visible,
 a:focus-visible,
 input:focus-visible,
 select:focus-visible {
-  outline: 2px solid #ffb69a;
+  outline: 2px solid #ff4057;
   outline-offset: 5px;
 }
 h1,
@@ -62,8 +60,8 @@ p {
   margin: 0;
 }
 ::selection {
-  background: #a6dce5;
-  color: #0d242e;
+  background: #ff4057;
+  color: #101114;
 }
 svg {
   flex-shrink: 0;
