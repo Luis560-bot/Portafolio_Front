@@ -1,165 +1,65 @@
 import { useEffect, useRef, useState } from 'react'
 import { Arrow } from './components/Arrow'
+import { NetworkField } from './components/NetworkField'
 import { ProjectPreview } from './components/ProjectPreview'
 import { ProjectDemo } from './components/ProjectDemo'
 import { projects } from './data/projects'
 import type { Project } from './data/projects'
 import './components/ProjectPreview.css'
+import './components/ProjectArt.css'
 import './components/ProjectDemo.css'
 import './App.css'
 
 const github = 'https://github.com/Luis560-bot'
-const projectNotes = {
-  pulse: {
-    idea: 'Ordenar lo complejo.',
-    caption: 'DATA → CLARITY',
-  },
-  forma: {
-    idea: 'Dejar respirar al producto.',
-    caption: 'LESS → BETTER',
-  },
-  orbit: {
-    idea: 'Hacer espacio a las ideas.',
-    caption: 'IDEAS → ACTION',
-  },
+const sections = [
+  { id: 'sobre-mi', label: 'Sobre mí' },
+  { id: 'proyectos', label: 'Proyectos' },
+  { id: 'enfoque', label: 'Enfoque' },
+  { id: 'contacto', label: 'Contacto' },
+]
+const projectIdeas = {
+  pulse: 'La claridad también se diseña.',
+  forma: 'Menos pasos. Más intención.',
+  orbit: 'De una idea al siguiente paso.',
 }
-
-function Workbench({
-  onOpen,
-}: {
-  onOpen: (project: Project, trigger: HTMLButtonElement) => void
-}) {
-  const [activeId, setActiveId] = useState<Project['id']>('pulse')
-  const [compact, setCompact] = useState(
-    () => window.matchMedia('(max-width: 540px)').matches,
-  )
-  useEffect(() => {
-    const query = window.matchMedia('(max-width: 540px)')
-    const update = () => setCompact(query.matches)
-    query.addEventListener('change', update)
-    return () => query.removeEventListener('change', update)
-  }, [])
-  const active = projects.find((project) => project.id === activeId)!
-  const notes = projectNotes[active.id]
+function GitHubIcon() {
   return (
-    <div className="workbench">
-      <div className="workbench-chrome">
-        <span>
-          <span aria-hidden="true">⌘</span> interface explorer
-        </span>
-        <span>SELECCIONA. EXPLORA. INTERACTÚA.</span>
-        <span className="explorer-status">
-          <i /> EN EL NAVEGADOR
-        </span>
-      </div>
-      <div className="workbench-body">
-        <div className="workbench-sidebar">
-          <span className="overline">ELIGE UNA PERSPECTIVA</span>
-          <div
-            className="explorer-tabs"
-            role="tablist"
-            aria-label="Explorar interfaces"
-            aria-orientation={compact ? 'horizontal' : 'vertical'}
-          >
-            {projects.map((project, index) => (
-              <button
-                type="button"
-                role="tab"
-                key={project.id}
-                id={`tab-${project.id}`}
-                aria-controls="explorer-panel"
-                aria-selected={active.id === project.id}
-                tabIndex={active.id === project.id ? 0 : -1}
-                onClick={() => setActiveId(project.id)}
-                onKeyDown={(e) => {
-                  if (
-                    [
-                      'ArrowDown',
-                      'ArrowUp',
-                      'ArrowLeft',
-                      'ArrowRight',
-                      'Home',
-                      'End',
-                    ].includes(e.key)
-                  ) {
-                    e.preventDefault()
-                    const next =
-                      e.key === 'Home'
-                        ? 0
-                        : e.key === 'End'
-                          ? projects.length - 1
-                          : (index +
-                              (e.key === 'ArrowDown' || e.key === 'ArrowRight'
-                                ? 1
-                                : -1) +
-                              projects.length) %
-                            projects.length
-                    setActiveId(projects[next].id)
-                    document.getElementById(`tab-${projects[next].id}`)?.focus()
-                  }
-                }}
-              >
-                <span className={`project-dot dot-${project.id}`} />
-                <span>
-                  {project.title}
-                  <small>{project.type}</small>
-                </span>
-                <Arrow />
-              </button>
-            ))}
-          </div>
-          <p>
-            Conceptos que puedes probar.
-            <br />
-            Código que puedes explorar.
-          </p>
-          <span className="sidebar-bottom">
-            REACT + TYPESCRIPT <span>↗</span>
-          </span>
-        </div>
-        <div
-          className={`explorer-panel scene-${active.id}`}
-          id="explorer-panel"
-          role="tabpanel"
-          aria-labelledby={`tab-${active.id}`}
-          tabIndex={0}
-        >
-          <span className="scene-coordinate">
-            UI / {active.type.toUpperCase()}
-          </span>
-          <span className="scene-word" aria-hidden="true">
-            {active.title}
-          </span>
-          <div className="explorer-preview" key={active.id}>
-            <ProjectPreview id={active.id} />
-          </div>
-          <div className="scene-bottom">
-            <span>{notes.caption}</span>
-            <button
-              type="button"
-              onClick={(e) => onOpen(active, e.currentTarget)}
-            >
-              Probar {active.title} <Arrow diagonal />
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.61-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03A9.6 9.6 0 0 1 12 6.98a9.6 9.6 0 0 1 2.5.34c1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.33 4.69-4.56 4.94.36.31.68.92.68 1.85v2.59c0 .27.18.58.69.48A10 10 0 0 0 12 2Z" />
+    </svg>
   )
 }
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('sobre-mi')
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const closeTrigger = useRef<HTMLButtonElement | null>(null)
   const menuTrigger = useRef<HTMLButtonElement | null>(null)
   useEffect(() => {
     if (!selectedProject) closeTrigger.current?.focus()
   }, [selectedProject])
-  function openDemo(project: Project, trigger: HTMLButtonElement) {
-    closeTrigger.current = trigger
-    setSelectedProject(project)
-  }
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries
+          .filter((entry) => entry.isIntersecting)
+          .forEach((entry) => setActiveSection(entry.target.id))
+      },
+      { rootMargin: '-15% 0px -55% 0px', threshold: 0 },
+    )
+    sections.forEach((section) => {
+      const element = document.getElementById(section.id)
+      if (element) observer.observe(element)
+    })
+    return () => observer.disconnect()
+  }, [])
   return (
     <>
       <a className="skip-link" href="#contenido">
@@ -168,13 +68,12 @@ function App() {
       <header className="site-header">
         <div className="container header-inner">
           <a className="wordmark" href="#inicio" aria-label="Luis, inicio">
-            <span className="brand-symbol">
-              L<span>↗</span>
-            </span>
-            <span>
-              LUIS<span className="brand-role">FRONTEND DEVELOPER</span>
-            </span>
+            luis<span aria-hidden="true">✳</span>
           </a>
+          <span className="header-caption">
+            DESARROLLO FRONTEND
+            <br />& EXPERIENCIAS DIGITALES
+          </span>
           <button
             ref={menuTrigger}
             className="menu-toggle"
@@ -184,7 +83,7 @@ function App() {
             aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
             onClick={() => setMenuOpen(!menuOpen)}
           >
-            {menuOpen ? 'CERRAR ×' : 'MENÚ +'}
+            {menuOpen ? 'Cerrar ×' : 'Menú +'}
           </button>
           <nav
             className={menuOpen ? 'nav-open' : ''}
@@ -197,271 +96,305 @@ function App() {
               }
             }}
           >
-            <a href="#proyectos" onClick={() => setMenuOpen(false)}>
-              Proyectos
-            </a>
             <a href="#sobre-mi" onClick={() => setMenuOpen(false)}>
               Sobre mí
             </a>
-            <a href="#contacto" onClick={() => setMenuOpen(false)}>
-              Conectemos <Arrow diagonal />
+            <a href="#proyectos" onClick={() => setMenuOpen(false)}>
+              Proyectos
+            </a>
+            <a
+              href="#contacto"
+              className="header-contact"
+              onClick={() => setMenuOpen(false)}
+            >
+              Hablemos <Arrow diagonal />
             </a>
           </nav>
-          <a
-            className="header-github"
-            href={github}
-            target="_blank"
-            rel="noreferrer"
-          >
-            GitHub <Arrow diagonal />
-          </a>
         </div>
       </header>
       <main id="contenido">
-        <section className="hero container" id="inicio">
-          <div className="hero-topline">
-            <span className="overline">
-              <i /> PORTAFOLIO PERSONAL / LUIS
-            </span>
-            <span className="overline">DISEÑO · INTERACCIÓN · CÓDIGO</span>
-          </div>
-          <h1>
-            Un navegador.
-            <br />
-            <em>Infinitas posibilidades.</em>
-          </h1>
-          <div className="hero-description">
-            <p>
-              Soy Luis, desarrollador frontend. Transformo ideas en interfaces
-              que dan ganas de explorar.
-            </p>
-            <a className="inline-link" href="#proyectos">
-              Descubre mi trabajo <span className="round-arrow">↓</span>
-            </a>
-          </div>
-          <Workbench onOpen={openDemo} />
-          <div className="hero-caption">
-            <span>EL FRONTEND ES MI FORMA DE CONECTAR IDEAS Y PERSONAS.</span>
-            <span>
-              DESLIZA PARA SEGUIR EXPLORANDO <span>↓</span>
-            </span>
-          </div>
-        </section>
-        <section className="projects-section container" id="proyectos">
-          <div className="section-heading">
-            <div>
-              <span className="overline">LABORATORIO DE INTERFACES</span>
-              <h2>
-                Más allá
-                <br />
-                <em>de lo visible.</em>
-              </h2>
+        <section className="hero" id="inicio">
+          <NetworkField />
+          <div className="container hero-inner">
+            <div className="hero-topline">
+              <span className="eyebrow">
+                <i /> HOLA, SOY LUIS.
+              </span>
+              <span className="hero-edition">
+                PORTAFOLIO PERSONAL / FRONTEND
+              </span>
             </div>
-            <p>
-              Cada interfaz es una oportunidad para resolver algo de una forma
-              distinta. Estos son mis experimentos.
-            </p>
-          </div>
-          <div className="project-list">
-            {projects.map((project) => (
-              <article
-                className={`project-row project-${project.id}`}
-                key={project.id}
-              >
-                <div className="project-info">
-                  <span className="project-category">
-                    <i className={`project-dot dot-${project.id}`} />
-                    {project.type} / CONCEPTO PERSONAL
+            <div className="hero-grid">
+              <h1 className="hero-title">
+                <span>FRONT</span>
+                <span className="title-second">
+                  END<span className="title-period">.</span>
+                  <span className="title-arrow" aria-hidden="true">
+                    ↗
                   </span>
-                  <h3>
-                    {project.title}
-                    <Arrow diagonal />
-                  </h3>
-                  <h4>{projectNotes[project.id].idea}</h4>
-                  <p>{project.description}</p>
-                  <div className="project-tags">
-                    {project.tags.map((tag) => (
-                      <span key={tag}>{tag}</span>
-                    ))}
-                  </div>
-                  <button
-                    className="project-open"
-                    type="button"
-                    aria-label={`Abrir demo de ${project.title}`}
-                    onClick={(e) => openDemo(project, e.currentTarget)}
-                  >
-                    Explorar la demo <Arrow />
-                  </button>
-                </div>
-                <div className={`project-visual scene-${project.id}`}>
-                  <span className="visual-corner top-left" />
-                  <span className="visual-corner bottom-right" />
-                  <ProjectPreview id={project.id} />
-                  <span className="visual-caption">
-                    {projectNotes[project.id].caption}
-                  </span>
-                </div>
-              </article>
-            ))}
-          </div>
-          <p className="projects-note">
-            ↳ Demos con datos de ejemplo. Un espacio para experimentar, sin
-            clientes ni métricas reales.
-          </p>
-        </section>
-        <section className="about-section" id="sobre-mi">
-          <div className="container">
-            <div className="about-heading">
-              <span className="overline">DETRÁS DE LA PANTALLA</span>
-              <span className="about-location">LUIS / FRONTEND</span>
-            </div>
-            <div className="about-grid">
-              <h2>
-                Pienso en diseño.
-                <br />
-                <em>Hablo en código.</em>
-              </h2>
-              <div className="about-copy">
+                </span>
+                <span className="sr-only"> — Desarrollador frontend</span>
+              </h1>
+              <div className="hero-intro">
+                <span className="intro-kicker">
+                  DISEÑO EN LA CABEZA.
+                  <br />
+                  CÓDIGO EN LAS MANOS.
+                </span>
                 <p>
-                  Soy Luis. Me gusta entender cómo funcionan las cosas y
-                  encontrar una forma más clara, más útil y más interesante de
-                  construirlas.
+                  Construyo interfaces que conectan lo que imaginas con lo que
+                  puedes explorar.
                 </p>
-                <p>
-                  Mi terreno es el navegador: componentes, interacciones,
-                  layouts que se adaptan y esos pequeños detalles que hacen que
-                  una interfaz se sienta bien.
-                </p>
-                <a
-                  className="inline-link"
-                  href={github}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Lo que estoy construyendo <Arrow diagonal />
+                <a className="hero-cta" href="#proyectos">
+                  Explorar proyectos <Arrow />
                 </a>
               </div>
             </div>
-            <div className="skill-table">
-              <div>
-                <span>Construir</span>
-                <p>
-                  React <i>/</i> TypeScript <i>/</i> JavaScript
-                </p>
-                <span>COMPONENTES CON PROPÓSITO</span>
-              </div>
-              <div>
-                <span>Dar forma</span>
-                <p>
-                  HTML & CSS <i>/</i> Responsive <i>/</i> Interacciones
-                </p>
-                <span>DE LA IDEA A LA PANTALLA</span>
-              </div>
-              <div>
-                <span>Explorar</span>
-                <p>
-                  Figma <i>/</i> Prototipos <i>/</i> Git
-                </p>
-                <span>APRENDER EN CADA ITERACIÓN</span>
-              </div>
+            <div className="hero-bottom">
+              <span>
+                REACT <i>+</i> TYPESCRIPT <i>+</i> CREATIVIDAD
+              </span>
+              <a href="#sobre-mi">
+                SIGUE EXPLORANDO <span>↓</span>
+              </a>
             </div>
           </div>
         </section>
-        <section className="details-section container">
-          <div className="details-heading">
-            <span className="overline">LO QUE NO SIEMPRE SE VE</span>
-            <h2>
-              Una buena interfaz
-              <br />
-              <em>también se siente.</em>
-            </h2>
-          </div>
-          <div className="details-grid">
-            <article>
-              <div
-                className="detail-illustration keyboard-art"
-                aria-hidden="true"
-              >
-                <span>tab</span>
-                <i>→</i>
-                <span>enter ↵</span>
-              </div>
-              <h3>Un camino para todos.</h3>
-              <p>
-                Foco visible, navegación por teclado y contenido que se
-                entiende. La accesibilidad forma parte del diseño.
-              </p>
-            </article>
-            <article>
-              <div
-                className="detail-illustration responsive-art"
-                aria-hidden="true"
-              >
-                <span />
-                <span />
-                <span />
-              </div>
-              <h3>El espacio cambia. La idea, no.</h3>
-              <p>
-                Interfaces que encuentran su lugar en cada pantalla, desde un
-                móvil hasta un escritorio.
-              </p>
-            </article>
-            <article>
-              <div
-                className="detail-illustration feedback-art"
-                aria-hidden="true"
-              >
-                <span>✓</span>
-                <i>Listo para explorar</i>
-              </div>
-              <h3>Cada acción tiene respuesta.</h3>
-              <p>
-                Estados claros y movimiento con intención. Pequeños detalles que
-                acompañan a quien está al otro lado.
-              </p>
-            </article>
-          </div>
-        </section>
-        <section className="contact-section" id="contacto">
-          <div className="container contact-inner">
+        <div className="section-divider container">
+          <span>DEL PRIMER PÍXEL AL ÚLTIMO DETALLE.</span>
+          <span>DISEÑO ↔ DESARROLLO</span>
+        </div>
+        <div className="portfolio-layout container">
+          <aside className="profile-sidebar">
             <div>
-              <span className="overline">¿TIENES UNA IDEA EN MENTE?</span>
-              <h2>
-                Hagamos
-                <br />
-                <em>clic.</em>
-                <span aria-hidden="true">↗</span>
-              </h2>
+              <span className="eyebrow">LA PERSONA DETRÁS DEL CÓDIGO</span>
+              <a href="#inicio" className="profile-name">
+                Luis<span>.</span>
+              </a>
+              <p className="profile-role">Frontend Developer</p>
+              <p className="profile-bio">
+                Me interesa el punto donde una buena idea se convierte en una
+                experiencia que se siente bien.
+              </p>
+              <nav className="section-index" aria-label="Índice de secciones">
+                {sections.map((section) => (
+                  <a
+                    key={section.id}
+                    href={`#${section.id}`}
+                    aria-current={
+                      activeSection === section.id ? 'location' : undefined
+                    }
+                    onClick={() => setActiveSection(section.id)}
+                  >
+                    <span className="index-line" />
+                    {section.label}
+                    <span className="index-arrow" aria-hidden="true">
+                      ↗
+                    </span>
+                  </a>
+                ))}
+              </nav>
             </div>
-            <div className="contact-copy">
-              <p>
-                Un proyecto, una colaboración
-                <br />o una conversación sobre frontend.
+            <div className="profile-bottom">
+              <a
+                href={github}
+                className="social-link"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <GitHubIcon /> Mi GitHub <Arrow diagonal />
+              </a>
+              <span>
+                SIEMPRE HAY ALGO NUEVO
                 <br />
-                Todo empieza conectando.
+                QUE CONSTRUIR.
+              </span>
+            </div>
+          </aside>
+          <div className="portfolio-content">
+            <section className="about-section content-section" id="sobre-mi">
+              <span className="eyebrow">SOBRE MÍ</span>
+              <h2>
+                Una buena interfaz
+                <br />
+                se ve. <span>Y se siente.</span>
+              </h2>
+              <div className="about-copy">
+                <p>
+                  Soy Luis, desarrollador frontend. Disfruto unir la lógica del
+                  código con la intuición del diseño para construir experiencias
+                  claras, accesibles y con personalidad.
+                </p>
+                <p>
+                  Me gusta experimentar, resolver problemas de interfaz y cuidar
+                  lo que pasa entre un clic y el siguiente: la respuesta, el
+                  movimiento y los pequeños detalles.
+                </p>
+                <p>
+                  Mi espacio de trabajo es el navegador.
+                  <br />
+                  <strong>Mi punto de partida, la curiosidad.</strong>
+                </p>
+              </div>
+              <div className="stack-list" aria-label="Tecnologías que utilizo">
+                {[
+                  'React',
+                  'TypeScript',
+                  'JavaScript',
+                  'HTML & CSS',
+                  'Figma',
+                  'Git',
+                ].map((tech, i) => (
+                  <span key={tech}>
+                    <i>{['⚛', 'TS', 'JS', '#', '◇', '⑂'][i]}</i>
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </section>
+            <section
+              className="projects-section content-section"
+              id="proyectos"
+            >
+              <div className="section-heading">
+                <span className="eyebrow">IDEAS QUE YA PUEDES EXPLORAR</span>
+                <h2>
+                  Selección de
+                  <br />
+                  <span>interfaces.</span>
+                </h2>
+                <p>
+                  Un laboratorio personal de diseño y desarrollo. Cada concepto
+                  se puede probar aquí mismo.
+                </p>
+              </div>
+              <div className="project-list">
+                {projects.map((project) => (
+                  <article
+                    className={`project-card project-${project.id}`}
+                    key={project.id}
+                  >
+                    <button
+                      className={`project-cover cover-${project.id}`}
+                      type="button"
+                      aria-label={`Abrir demo de ${project.title}`}
+                      onClick={(e) => {
+                        closeTrigger.current = e.currentTarget
+                        setSelectedProject(project)
+                      }}
+                    >
+                      <span className="cover-category">
+                        {project.type} / CONCEPTO
+                      </span>
+                      <span className="cover-watermark" aria-hidden="true">
+                        {project.title}
+                      </span>
+                      <div className="cover-preview">
+                        <ProjectPreview id={project.id} />
+                      </div>
+                      <span className="cover-action">
+                        Probar interfaz <Arrow diagonal />
+                      </span>
+                    </button>
+                    <div className="project-info">
+                      <div className="project-title">
+                        <h3>
+                          {project.title}
+                          <span> / {project.type}</span>
+                        </h3>
+                        <Arrow diagonal />
+                      </div>
+                      <p className="project-idea">{projectIdeas[project.id]}</p>
+                      <p className="project-description">
+                        {project.description}
+                      </p>
+                      <div className="project-tags">
+                        {project.tags.map((tag) => (
+                          <span key={tag}>{tag}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+              <p className="projects-note">
+                Los proyectos son demos personales con datos de ejemplo.
+              </p>
+            </section>
+            <section className="approach-section content-section" id="enfoque">
+              <span className="eyebrow">MI FORMA DE CONSTRUIR</span>
+              <h2>
+                El cuidado está
+                <br />
+                <span>en los detalles.</span>
+              </h2>
+              <div className="principle-list">
+                <article>
+                  <span aria-hidden="true">⌘</span>
+                  <div>
+                    <h3>Que funcione para todos.</h3>
+                    <p>
+                      Accesibilidad, foco visible y navegación por teclado desde
+                      el primer componente.
+                    </p>
+                  </div>
+                </article>
+                <article>
+                  <span aria-hidden="true">↔</span>
+                  <div>
+                    <h3>Que encuentre su espacio.</h3>
+                    <p>
+                      Layouts que se adaptan a la pantalla y mantienen una
+                      lectura cómoda.
+                    </p>
+                  </div>
+                </article>
+                <article>
+                  <span aria-hidden="true">↗</span>
+                  <div>
+                    <h3>Que cada acción se sienta.</h3>
+                    <p>
+                      Estados claros y movimiento que acompaña, con respeto por
+                      tus preferencias.
+                    </p>
+                  </div>
+                </article>
+              </div>
+            </section>
+            <section className="contact-section content-section" id="contacto">
+              <span className="eyebrow">
+                EL SIGUIENTE PROYECTO EMPIEZA AQUÍ
+              </span>
+              <h2>
+                ¿Lo llevamos
+                <br />
+                al navegador<span>?</span>
+              </h2>
+              <p>
+                Una idea, una colaboración o una conversación sobre frontend. Me
+                encuentras en GitHub.
               </p>
               <a
-                className="contact-link"
+                className="contact-cta"
                 href={github}
                 target="_blank"
                 rel="noreferrer"
               >
-                Nos vemos en GitHub <Arrow diagonal />
+                Conectar en GitHub <Arrow diagonal />
               </a>
               <span className="contact-handle">@Luis560-bot</span>
-            </div>
+            </section>
           </div>
-        </section>
+        </div>
       </main>
       <footer className="container site-footer">
-        <a href="#inicio" className="footer-brand">
-          LUIS<span>↗</span>
+        <a href="#inicio" className="footer-mark" aria-label="Volver al inicio">
+          LUIS<span>✳</span>
         </a>
-        <span>Ideas, píxeles y mucho cuidado.</span>
-        <a href="#inicio">
-          VOLVER AL INICIO <span>↑</span>
-        </a>
+        <div>
+          <span>HECHO CON REACT, CURIOSIDAD Y CUIDADO.</span>
+          <a href="#inicio">VOLVER ARRIBA ↑</a>
+        </div>
       </footer>
       {selectedProject && (
         <ProjectDemo

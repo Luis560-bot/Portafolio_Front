@@ -1,0 +1,141 @@
+.preview-dashboard {
+  --purple: #377e9b;
+}
+.preview-dashboard,
+.preview-store,
+.preview-tasks {
+  color: #263239;
+  color-scheme: light;
+}
+.cover-preview .preview-dashboard aside {
+  width: 50px;
+  gap: 23px;
+}
+.cover-preview .mini-brand {
+  margin-top: 11px;
+  font-size: 27px;
+}
+.cover-preview .dashboard-body {
+  padding: 19px 22px;
+}
+.cover-preview .preview-top {
+  font-size: 12px;
+  margin-bottom: 14px;
+}
+.cover-preview .mini-stats {
+  gap: 12px;
+}
+.cover-preview .mini-stats > div {
+  padding: 9px;
+}
+.cover-preview .mini-stats small {
+  font-size: 7px;
+}
+.cover-preview .mini-stats strong {
+  font-size: 21px;
+}
+.cover-preview .mini-stats em {
+  font-size: 7px;
+}
+.cover-preview .chart-header {
+  font-size: 9px;
+  margin-block: 15px 8px;
+}
+.cover-preview .bar-chart {
+  height: 63px;
+  gap: 9px;
+}
+.bar-chart i:nth-child(3n) {
+  background: #4e8fa8;
+}
+.bar-chart i {
+  background: #c6dce5;
+}
+.cover-preview .chart-days {
+  font-size: 6px;
+}
+.cover-preview .preview-store {
+  padding: 23px;
+}
+.cover-preview .store-header b {
+  font-size: 20px;
+}
+.cover-preview .store-header span {
+  font-size: 8px;
+}
+.cover-preview .store-main {
+  height: 174px;
+  gap: 18px;
+}
+.cover-preview .store-main h4 {
+  font-size: 31px;
+  margin-block: 14px 20px;
+}
+.cover-preview .store-main small {
+  font-size: 6px;
+}
+.cover-preview .mini-shop-button {
+  font-size: 8px;
+  padding: 9px 12px;
+}
+.cover-preview .lamp-scene {
+  height: 158px;
+}
+.cover-preview .lamp-shade {
+  transform: scale(1.4);
+  top: 41px;
+}
+.cover-preview .lamp-stem {
+  top: 76px;
+  height: 53px;
+}
+.cover-preview .lamp-base {
+  transform: scale(1.4);
+  bottom: 22px;
+}
+.cover-preview .lamp-scene > span {
+  font-size: 6px;
+  bottom: -13px;
+}
+.cover-preview .preview-tasks {
+  padding: 19px 23px;
+}
+.cover-preview .orbit-header b {
+  font-size: 14px;
+}
+.cover-preview .orbit-header > span {
+  font-size: 7px;
+}
+.cover-preview .orbit-header > i {
+  font-size: 7px;
+  padding: 6px;
+}
+.cover-preview .preview-tasks h4 {
+  font-size: 21px;
+  margin-block: 12px;
+}
+.cover-preview .mini-board {
+  gap: 13px;
+}
+.cover-preview .mini-board > div {
+  padding: 8px;
+}
+.cover-preview .mini-board > div > span {
+  font-size: 8px;
+}
+.cover-preview .mini-board article {
+  padding: 6px;
+  margin-bottom: 4px;
+}
+.cover-preview .mini-board article small {
+  font-size: 5px;
+}
+.cover-preview .mini-board article strong {
+  font-size: 8px;
+}
+.cover-preview .mini-board article p {
+  font-size: 6px;
+}
+.cover-preview .mini-board article i {
+  font-size: 9px;
+}
