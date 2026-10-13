@@ -1,75 +1,33 @@
-# React + TypeScript + Vite
+# Luis · Frontend portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Portafolio en español con React, TypeScript y Vite. Diseño adaptable con laboratorio visual, demos interactivas, presentación personal y contacto a través de GitHub.
 
-Currently, two official plugins are available:
+## Desarrollo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```sh
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+## Verificación y producción
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```sh
+npm run lint
+npm run build
+npm run preview
 ```
+
+La compilación genera `dist/`. Para GitHub Pages bajo una subruta, configura `base` en `vite.config.ts` según la URL de publicación.
+
+## Personalización
+
+- Nombre, biografía, GitHub y proyectos: `src/App.tsx`.
+- Colores, tipografía y estilos: `src/index.css` y `src/App.css`.
+- Título, descripción e idioma: `index.html`.
+- Icono: `public/favicon.svg`.
+
+Pulse, Forma y Orbit son conceptos de demostración. Sus datos no representan clientes ni resultados reales. Las demos permiten cambiar el período del dashboard, filtrar productos y gestionar una bolsa, y crear, completar o eliminar tareas. El estado se reinicia al cerrarlas; no requieren backend ni realizan pagos.
+
+El laboratorio permite alternar diseño y código, cambiar el color y reaccionar al diseño. Los diálogos admiten teclado, Escape y recuperación del foco. El sitio respeta la preferencia de movimiento reducido.
+
+DM Sans y Space Grotesk se cargan desde Google Fonts con alternativas del sistema. Las ilustraciones y vistas de proyecto se construyen con CSS y SVG locales.
