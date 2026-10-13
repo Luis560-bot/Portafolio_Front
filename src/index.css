@@ -1,17 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;550;600;650;700&family=DM+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap');
 :root {
   font-family: 'DM Sans', sans-serif;
-  color: #24232e;
-  background: #fcfcfe;
+  color: #e7eeec;
+  background: #0d242e;
+  color-scheme: dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --purple: #7045db;
-  --ink: #24232e;
-  --muted: #72707e;
-  --line: #e8e7ee;
-  --display: 'Space Grotesk', sans-serif;
+  --navy: #0d242e;
+  --ink: #e7eeec;
+  --muted: #a4b5bb;
+  --line: #344e5b;
+  --blue: #a6dce5;
+  --peach: #ffb69a;
+  --display: 'Bricolage Grotesque', sans-serif;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --mono: 'IBM Plex Mono', monospace;
 }
 * {
   box-sizing: border-box;
@@ -46,7 +51,7 @@ button:focus-visible,
 a:focus-visible,
 input:focus-visible,
 select:focus-visible {
-  outline: 3px solid #7045db;
+  outline: 2px solid #ffb69a;
   outline-offset: 5px;
 }
 h1,
@@ -57,8 +62,8 @@ p {
   margin: 0;
 }
 ::selection {
-  background: #dfd1ff;
-  color: #35235e;
+  background: #a6dce5;
+  color: #0d242e;
 }
 svg {
   flex-shrink: 0;
