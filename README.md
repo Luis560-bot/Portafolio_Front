@@ -19,6 +19,17 @@ npm run preview
 
 La compilación genera `dist/`. Para GitHub Pages bajo una subruta, configura `base` en `vite.config.ts` según la URL de publicación.
 
+## Docker
+
+Construye y ejecuta la versión de producción con:
+
+```sh
+docker build -t portafolio-front .
+docker run --rm -p 8080:80 portafolio-front
+```
+
+El portafolio quedará disponible en `http://localhost:8080`.
+
 ## Personalización
 
 - Nombre, biografía y GitHub: `src/App.tsx`.
