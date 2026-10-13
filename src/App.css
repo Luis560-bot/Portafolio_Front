@@ -437,13 +437,13 @@ h2 > span {
   color: #252d39;
   isolation: isolate;
 }
-.cover-pulse {
+.cover-airware {
   background: #292946;
 }
-.cover-forma {
+.cover-limpio-peru {
   background: #c4d3b6;
 }
-.cover-orbit {
+.cover-task-p {
   background: #d6a48f;
 }
 .cover-category {
@@ -455,10 +455,10 @@ h2 > span {
   letter-spacing: 1px;
   color: #aaa8d1;
 }
-.cover-forma .cover-category {
+.cover-limpio-peru .cover-category {
   color: #657058;
 }
-.cover-orbit .cover-category {
+.cover-task-p .cover-category {
   color: #7b4f3f;
 }
 .cover-watermark {
@@ -471,32 +471,28 @@ h2 > span {
   letter-spacing: -4px;
   z-index: -1;
 }
-.cover-forma .cover-watermark,
-.cover-orbit .cover-watermark {
+.cover-limpio-peru .cover-watermark,
+.cover-task-p .cover-watermark {
   color: #ffffff18;
 }
 .cover-preview {
-  width: min(100%, 450px);
-  container-type: inline-size;
-  transform: rotate(-3deg);
+  width: 100%;
+  height: 100%;
+  display: block;
   transition:
     transform 0.35s,
     filter 0.35s;
 }
-.cover-forma .cover-preview {
-  transform: rotate(2deg);
-}
-.cover-orbit .cover-preview {
-  transform: rotate(-2deg);
-}
-.cover-preview > div {
+.cover-preview > img {
+  display: block;
   width: 100%;
-  height: 235px;
-  transform: none;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 3px;
   box-shadow: 0 15px 35px #17152230;
 }
 .project-cover:hover .cover-preview {
-  transform: translateY(-4px) rotate(0deg);
+  transform: translateY(-3px);
 }
 .cover-action {
   position: absolute;
@@ -511,10 +507,10 @@ h2 > span {
 .cover-action > svg {
   width: 12px;
 }
-.cover-forma .cover-action {
+.cover-limpio-peru .cover-action {
   color: #5b6b4d;
 }
-.cover-orbit .cover-action {
+.cover-task-p .cover-action {
   color: #7b4f3f;
 }
 .project-info {
@@ -568,34 +564,91 @@ h2 > span {
   color: #6f7483;
   margin-top: 23px;
 }
-.cover-preview .preview-store,
-.cover-preview .preview-tasks {
-  padding: 16px 20px;
+.project-links {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  flex-wrap: wrap;
+  margin-top: 20px;
 }
-.cover-preview .store-main h4 {
-  font-size: clamp(16px, 6cqi, 28px);
+.project-links > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 12px;
+  border: 1px solid #4c3440;
+  border-radius: 3px;
+  font-size: 10px;
+  color: #e3c6cf;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
 }
-.cover-preview .store-main {
-  height: 165px;
+.project-links > a:hover {
+  background: #43232e55;
+  border-color: var(--accent);
 }
-.cover-preview .lamp-scene {
-  height: 146px;
+.project-links > a > svg {
+  width: 13px;
+  height: 13px;
 }
-.cover-preview .mini-stats strong {
-  font-size: clamp(12px, 4.6cqi, 21px);
+.additional-projects {
+  margin-top: 38px;
 }
-.cover-preview .preview-tasks h4 {
-  font-size: clamp(14px, 4.6cqi, 21px);
+.additional-projects > h3 {
+  font: 500 20px var(--sans);
+  letter-spacing: -0.5px;
+  margin-bottom: 20px;
 }
-.cover-preview .mini-board article {
-  padding: 5px;
-  margin-bottom: 4px;
+.repository-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 22px;
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
 }
-.cover-preview .mini-board article:last-child {
-  margin-bottom: 0;
+.repository-card > svg {
+  flex-shrink: 0;
+  color: #747989;
+  margin-top: 3px;
+  width: 18px;
 }
-.cover-preview .mini-board > div {
-  padding: 7px;
+.repository-card h4 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 500 15px var(--sans);
+}
+.repository-card h4 > svg {
+  width: 13px;
+  height: 13px;
+  color: #747989;
+}
+.repository-card p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.85;
+  margin-top: 10px;
+}
+.repository-card:hover h4,
+.repository-card:hover h4 > svg {
+  color: var(--accent);
+}
+.all-repositories {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  padding-block: 10px;
+  margin-top: 10px;
+  color: #d3a7b5;
+  font-size: 11px;
+}
+.all-repositories > svg {
+  width: 14px;
+  height: 14px;
+}
+.all-repositories:hover {
+  color: var(--accent);
 }
 .principle-list {
   margin-top: 28px;
@@ -704,42 +757,6 @@ h2 > span {
 .site-footer > div > a {
   color: #b1b5c1;
 }
-.project-dialog {
-  --ink: #262632;
-  --muted: #74707f;
-  --display: 'DM Sans', sans-serif;
-  color-scheme: light;
-  color: var(--ink);
-  background: #fcfbfe;
-  border-radius: 9px;
-}
-.project-dialog .eyebrow {
-  color: #b32e48;
-  margin-bottom: 8px;
-  font-size: 8px;
-}
-.project-dialog h2 {
-  font-size: 30px;
-  letter-spacing: -0.8px;
-}
-.project-dialog h2 > span {
-  color: #8c829b;
-}
-.project-dialog::backdrop {
-  background: #080a11d9;
-}
-.project-dialog :focus-visible {
-  outline-color: #b32e48;
-}
-.close-button {
-  background: #f5e5eb;
-}
-.demo-chart i {
-  background: #bd536c;
-}
-.demo-chart > div:nth-child(2n) i {
-  background: #e6becb;
-}
 @media (min-width: 1550px) {
   .hero-inner {
     padding-block: 55px 30px;
@@ -839,34 +856,6 @@ h2 > span {
   .project-cover {
     height: 280px;
     padding-inline: 22px;
-  }
-  .cover-preview > div {
-    height: 210px;
-  }
-  .cover-preview .store-main {
-    height: 145px;
-  }
-  .cover-preview .lamp-scene {
-    height: 128px;
-  }
-  .cover-preview .mini-board article strong {
-    font-size: 6px;
-  }
-  .cover-preview .mini-board article p {
-    font-size: 5px;
-  }
-  .cover-preview .mini-board article small {
-    font-size: 4px;
-  }
-  .cover-preview .preview-store,
-  .cover-preview .preview-tasks {
-    padding: 14px;
-  }
-  .cover-preview .mini-board {
-    gap: 7px;
-  }
-  .cover-preview .mini-board > div {
-    padding: 6px;
   }
   .contact-section h2 {
     font-size: 41px;
@@ -1009,31 +998,6 @@ h2 > span {
   .project-cover {
     height: 315px;
     padding: 33px 35px 35px;
-  }
-  .cover-preview > div {
-    height: 235px;
-  }
-  .cover-preview .store-main {
-    height: 165px;
-  }
-  .cover-preview .lamp-scene {
-    height: 146px;
-  }
-  .cover-preview .preview-store,
-  .cover-preview .preview-tasks {
-    padding: 16px 20px;
-  }
-  .cover-preview .mini-board article strong {
-    font-size: 8px;
-  }
-  .cover-preview .mini-board article p {
-    font-size: 6px;
-  }
-  .cover-preview .mini-board article small {
-    font-size: 5px;
-  }
-  .cover-preview .mini-board > div {
-    padding: 7px;
   }
   .contact-section {
     margin-bottom: 0;
@@ -1240,9 +1204,6 @@ h2 > span {
     height: 250px;
     padding: 31px 19px 34px;
   }
-  .cover-preview > div {
-    height: 179px;
-  }
   .cover-watermark {
     font-size: 100px;
     letter-spacing: -2px;
@@ -1257,123 +1218,6 @@ h2 > span {
     right: 13px;
     font-size: 7px;
     gap: 8px;
-  }
-  .cover-preview .dashboard-body {
-    padding: 13px 12px;
-  }
-  .cover-preview .preview-dashboard aside {
-    width: 33px;
-    gap: 14px;
-  }
-  .cover-preview .mini-brand {
-    font-size: 21px;
-    margin: 7px 0 3px;
-  }
-  .cover-preview .preview-top {
-    font-size: 9px;
-    margin-bottom: 10px;
-  }
-  .cover-preview .mini-stats {
-    gap: 8px;
-  }
-  .cover-preview .mini-stats > div {
-    padding: 6px;
-  }
-  .cover-preview .mini-stats small,
-  .cover-preview .mini-stats em {
-    font-size: 5px;
-  }
-  .cover-preview .chart-header {
-    font-size: 6px;
-    margin-block: 10px 7px;
-  }
-  .cover-preview .bar-chart {
-    height: 43px;
-    gap: 5px;
-  }
-  .cover-preview .chart-days {
-    font-size: 4px;
-  }
-  .cover-preview .preview-store,
-  .cover-preview .preview-tasks {
-    padding: 13px;
-  }
-  .cover-preview .store-header b {
-    font-size: 14px;
-  }
-  .cover-preview .store-header span {
-    font-size: 5px;
-  }
-  .cover-preview .store-main {
-    height: 118px;
-    gap: 5px;
-  }
-  .cover-preview .store-main small {
-    font-size: 4px;
-  }
-  .cover-preview .store-main h4 {
-    margin-block: 8px 12px;
-  }
-  .cover-preview .mini-shop-button {
-    font-size: 5px;
-    padding: 6px 8px;
-  }
-  .cover-preview .lamp-scene {
-    height: 110px;
-  }
-  .cover-preview .lamp-shade {
-    transform: none;
-    top: 21px;
-  }
-  .cover-preview .lamp-stem {
-    top: 53px;
-    height: 39px;
-  }
-  .cover-preview .lamp-base {
-    transform: none;
-    bottom: 15px;
-  }
-  .cover-preview .lamp-scene > span {
-    font-size: 4px;
-    bottom: -11px;
-  }
-  .cover-preview .orbit-header b {
-    font-size: 10px;
-  }
-  .cover-preview .orbit-header > span {
-    font-size: 5px;
-  }
-  .cover-preview .orbit-header > i {
-    font-size: 5px;
-    padding: 4px;
-  }
-  .cover-preview .preview-tasks h4 {
-    margin-block: 10px;
-  }
-  .cover-preview .mini-board {
-    gap: 7px;
-  }
-  .cover-preview .mini-board > div {
-    padding: 5px;
-  }
-  .cover-preview .mini-board > div > span {
-    font-size: 5px;
-  }
-  .cover-preview .mini-board article {
-    padding: 4px;
-    margin-bottom: 3px;
-  }
-  .cover-preview .mini-board article strong {
-    font-size: 5px;
-  }
-  .cover-preview .mini-board article p {
-    font-size: 4px;
-  }
-  .cover-preview .mini-board article small {
-    font-size: 3px;
-  }
-  .cover-preview .mini-board article i {
-    font-size: 7px;
   }
   .project-info {
     margin-top: 17px;
@@ -1453,64 +1297,6 @@ h2 > span {
     font-size: 6px;
     line-height: 1.8;
   }
-  .project-dialog {
-    padding: 22px 18px;
-    max-height: calc(100svh - 24px);
-  }
-  .dialog-heading h2 {
-    font-size: 26px;
-  }
-  .dialog-heading h2 span {
-    font-size: 11px;
-  }
-  .demo-intro {
-    font-size: 12px;
-  }
-  .demo-metrics {
-    gap: 7px;
-  }
-  .demo-metrics > div {
-    padding: 13px 9px;
-  }
-  .demo-metrics span {
-    font-size: 9px;
-  }
-  .demo-metrics strong {
-    font-size: 18px;
-  }
-  .demo-chart {
-    gap: 8px;
-    height: 200px;
-  }
-  .demo-control-row {
-    gap: 12px;
-  }
-  .demo-control-row h3 {
-    font-size: 17px;
-  }
-  .demo-products {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px 12px;
-  }
-  .demo-products h3 {
-    font-size: 13px;
-  }
-  .demo-products button {
-    font-size: 9px;
-    padding-inline: 8px;
-  }
-  .task-form button {
-    padding-inline: 12px;
-  }
-  .task-form button span {
-    margin-left: 7px;
-  }
-  .task-item {
-    padding: 13px 10px;
-  }
-  .task-item label {
-    font-size: 11px;
-  }
 }
 @media (max-width: 360px) {
   .hero-title {
@@ -1525,11 +1311,5 @@ h2 > span {
   }
   .contact-section h2 {
     font-size: 36px;
-  }
-  .cover-preview .store-main h4 {
-    font-size: 16px;
-  }
-  .cover-preview .store-header > span:nth-child(2) {
-    display: none;
   }
 }

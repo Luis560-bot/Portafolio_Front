@@ -1,13 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Arrow } from './components/Arrow'
 import { NetworkField } from './components/NetworkField'
-import { ProjectPreview } from './components/ProjectPreview'
-import { ProjectDemo } from './components/ProjectDemo'
-import { projects } from './data/projects'
-import type { Project } from './data/projects'
-import './components/ProjectPreview.css'
-import './components/ProjectArt.css'
-import './components/ProjectDemo.css'
+import { additionalProjects, projects } from './data/projects'
 import './App.css'
 
 const github = 'https://github.com/Luis560-bot'
@@ -17,11 +11,6 @@ const sections = [
   { id: 'enfoque', label: 'Enfoque' },
   { id: 'contacto', label: 'Contacto' },
 ]
-const projectIdeas = {
-  pulse: 'La claridad también se diseña.',
-  forma: 'Menos pasos. Más intención.',
-  orbit: 'De una idea al siguiente paso.',
-}
 function GitHubIcon() {
   return (
     <svg
@@ -39,12 +28,7 @@ function GitHubIcon() {
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('sobre-mi')
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
-  const closeTrigger = useRef<HTMLButtonElement | null>(null)
   const menuTrigger = useRef<HTMLButtonElement | null>(null)
-  useEffect(() => {
-    if (!selectedProject) closeTrigger.current?.focus()
-  }, [selectedProject])
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -257,15 +241,15 @@ function App() {
               id="proyectos"
             >
               <div className="section-heading">
-                <span className="eyebrow">IDEAS QUE YA PUEDES EXPLORAR</span>
+                <span className="eyebrow">DEL CÓDIGO A LA PANTALLA</span>
                 <h2>
-                  Selección de
+                  Proyectos reales.
                   <br />
-                  <span>interfaces.</span>
+                  <span>Código abierto.</span>
                 </h2>
                 <p>
-                  Un laboratorio personal de diseño y desarrollo. Cada concepto
-                  se puede probar aquí mismo.
+                  Una selección de mis repositorios de GitHub. Explora las
+                  aplicaciones publicadas o conoce cómo están construidas.
                 </p>
               </div>
               <div className="project-list">
@@ -274,28 +258,34 @@ function App() {
                     className={`project-card project-${project.id}`}
                     key={project.id}
                   >
-                    <button
+                    <a
                       className={`project-cover cover-${project.id}`}
-                      type="button"
-                      aria-label={`Abrir demo de ${project.title}`}
-                      onClick={(e) => {
-                        closeTrigger.current = e.currentTarget
-                        setSelectedProject(project)
-                      }}
+                      href={project.liveUrl ?? project.repoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`Abrir ${project.title} en una nueva pestaña`}
                     >
                       <span className="cover-category">
-                        {project.type} / CONCEPTO
+                        {project.previewLabel}
                       </span>
                       <span className="cover-watermark" aria-hidden="true">
                         {project.title}
                       </span>
                       <div className="cover-preview">
-                        <ProjectPreview id={project.id} />
+                        <img
+                          src={project.image}
+                          alt={project.imageAlt}
+                          width="1366"
+                          height="620"
+                          loading="lazy"
+                          decoding="async"
+                        />
                       </div>
                       <span className="cover-action">
-                        Probar interfaz <Arrow diagonal />
+                        {project.liveUrl ? 'Ver aplicación' : 'Ver repositorio'}{' '}
+                        <Arrow diagonal />
                       </span>
-                    </button>
+                    </a>
                     <div className="project-info">
                       <div className="project-title">
                         <h3>
@@ -304,7 +294,7 @@ function App() {
                         </h3>
                         <Arrow diagonal />
                       </div>
-                      <p className="project-idea">{projectIdeas[project.id]}</p>
+                      <p className="project-idea">{project.idea}</p>
                       <p className="project-description">
                         {project.description}
                       </p>
@@ -313,13 +303,67 @@ function App() {
                           <span key={tag}>{tag}</span>
                         ))}
                       </div>
+                      <div className="project-links">
+                        <a
+                          href={project.repoUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`Ver código de ${project.title}`}
+                        >
+                          <GitHubIcon /> Código <Arrow diagonal />
+                        </a>
+                        {project.liveUrl && (
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            aria-label={`Ver aplicación de ${project.title}`}
+                          >
+                            Ver aplicación <Arrow diagonal />
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </article>
                 ))}
               </div>
               <p className="projects-note">
-                Los proyectos son demos personales con datos de ejemplo.
+                Capturas de las aplicaciones publicadas. Task-P se presenta con
+                un esquema de su arquitectura.
               </p>
+              <div className="additional-projects">
+                <h3>Más código para explorar.</h3>
+                {additionalProjects.map((project) => (
+                  <a
+                    className="repository-card"
+                    href={project.repoUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    key={project.title}
+                  >
+                    <div>
+                      <h4>
+                        {project.title} <Arrow diagonal />
+                      </h4>
+                      <p>{project.description}</p>
+                      <div className="project-tags">
+                        {project.tags.map((tag) => (
+                          <span key={tag}>{tag}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <GitHubIcon />
+                  </a>
+                ))}
+                <a
+                  className="all-repositories"
+                  href={`${github}?tab=repositories`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Ver todos mis repositorios <Arrow diagonal />
+                </a>
+              </div>
             </section>
             <section className="approach-section content-section" id="enfoque">
               <span className="eyebrow">MI FORMA DE CONSTRUIR</span>
@@ -396,12 +440,6 @@ function App() {
           <a href="#inicio">VOLVER ARRIBA ↑</a>
         </div>
       </footer>
-      {selectedProject && (
-        <ProjectDemo
-          project={selectedProject}
-          onClose={() => setSelectedProject(null)}
-        />
-      )}
     </>
   )
 }
