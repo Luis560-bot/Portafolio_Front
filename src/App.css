@@ -115,8 +115,8 @@
   margin-top: 20px;
 }
 .hero-title {
-  font: 700 clamp(155px, 19vw, 270px)/0.79 var(--display);
-  letter-spacing: -6px;
+  font: 700 clamp(135px, 16vw, 230px)/0.79 var(--display);
+  letter-spacing: -5px;
   margin: 0 0 0 -7px;
 }
 .hero-title > span:not(.sr-only) {
@@ -133,7 +133,7 @@
 .title-arrow {
   display: inline-block;
   font-family: var(--sans);
-  font-size: 0.67em;
+  font-size: 0.6em;
   line-height: 0.8;
   font-weight: 400;
   color: transparent;
@@ -203,6 +203,7 @@
   font-size: 17px;
 }
 .network-field {
+  opacity: 0.72;
   position: absolute;
   inset: 0;
   height: 100%;
@@ -744,7 +745,7 @@ h2 > span {
     padding-block: 55px 30px;
   }
   .hero-title {
-    font-size: 285px;
+    font-size: 245px;
   }
   .hero-grid {
     margin-top: 30px;
@@ -758,7 +759,7 @@ h2 > span {
     width: calc(100% - 64px);
   }
   .hero-title {
-    font-size: 220px;
+    font-size: 188px;
   }
   .hero-grid {
     grid-template-columns: minmax(0, 1fr) 240px;
@@ -818,7 +819,7 @@ h2 > span {
     grid-template-columns: minmax(0, 1fr) 210px;
   }
   .hero-title {
-    font-size: 185px;
+    font-size: 160px;
   }
   .intro-kicker {
     font-size: 16px;
@@ -895,7 +896,7 @@ h2 > span {
     font-size: 11px;
   }
   .hero-title {
-    font-size: clamp(145px, 26vw, 200px);
+    font-size: clamp(128px, 23vw, 175px);
   }
   .hero-grid {
     grid-template-columns: 1fr;
@@ -1108,7 +1109,7 @@ h2 > span {
     gap: 32px;
   }
   .hero-title {
-    font-size: clamp(139px, 33vw, 172px);
+    font-size: clamp(122px, 29vw, 152px);
     letter-spacing: -3px;
     margin-left: -4px;
   }
@@ -1117,7 +1118,7 @@ h2 > span {
   }
   .title-arrow {
     margin-left: 16px;
-    font-size: 0.63em;
+    font-size: 0.57em;
     vertical-align: 7px;
   }
   .hero-intro {
@@ -1513,7 +1514,7 @@ h2 > span {
 }
 @media (max-width: 360px) {
   .hero-title {
-    font-size: 134px;
+    font-size: 118px;
   }
   .title-arrow {
     font-size: 0.55em;

@@ -113,7 +113,7 @@ export function NetworkField() {
     intersection.observe(element)
     const animate = () => {
       if (visible) {
-        phase += 0.0015
+        phase += 0.0012
         rotation.current = phase
         draw()
       }
